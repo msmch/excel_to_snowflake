@@ -1,0 +1,13 @@
+# 1. only one stage without nginx for DEV
+FROM node:20-slim AS builder
+
+WORKDIR /app
+
+# Copy package files and install deps
+COPY package.json ./
+RUN npm install
+COPY . .
+
+EXPOSE 8080
+
+CMD ["npm", "run", "dev", "--", "--host"]
